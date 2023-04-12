@@ -12,9 +12,7 @@ export const getTeams = async (req, res) => {
 
 export const getTeam = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const team = await Team.findById(id);
+    const team = await Team.findOne(name);
     res.json(team);
   } catch (error) {
     console.log(error.message);
@@ -34,15 +32,15 @@ export const createTeam = async (req, res) => {
 };
 
 export const updateTeam = async (req, res) => {
-  const { id } = req.params;
-  const team = await Team.findByIdAndUpdate(id, req.body);
+  const { name } = req.params;
+  const team = await Team.findOneAndUpdate(name, req.body);
   res.status(200).json(team);
 };
 
 export const deleteTeam = async (req, res) => {
   try {
-    const { id } = req.params;
-    const deleted = await Team.findByIdAndDelete(id);
+    const { name } = req.params;
+    const deleted = await Team.findOneAndDelete(name);
 
     if (deleted) {
       return res.status(200).send("Team Deleted!");
