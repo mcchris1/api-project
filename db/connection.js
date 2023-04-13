@@ -4,11 +4,13 @@ import chalk from "chalk";
 const MONGODB_URI =
   process.env.DB_URL || "mongodb://127.0.0.1:27017/nhl-api";
 
+  let mongooseConfig = { useNewUrlParser: true, useUnifiedTopology: true };
+
 // This is for Model.findByIdAndUpdate method, specifically so that {new: true} is the default
 mongoose.set("returnOriginal", false);
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(MONGODB_URI, mongooseConfig)
   .catch((error) =>
     console.log("Error connecting to MongoDB: ", error.message)
   );
