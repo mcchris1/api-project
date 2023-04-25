@@ -12,7 +12,7 @@ export const getTeams = async (req, res) => {
 
 export const getTeam = async (req, res) => {
   try {
-    const team = await Team.findOne(name);
+    const team = await Team.findOne(req.name);
     res.json(team);
   } catch (error) {
     console.log(error.message);
